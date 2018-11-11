@@ -39,6 +39,9 @@ function render(x, y, r, g, b) {
     if (renderIndex == 2) {
         blob(x, y, r, g, b)
     }
+    if (renderIndex == 3) {
+        lines(x, y, r, g, b)
+    }
 }
 
 function glitch(x, y, r, g, b) {
@@ -85,28 +88,28 @@ function blob(x, y, r, g, b) {
     ellipse(x * vScale, y * vScale, w * (w / 2));
 }
 
-function blob2(x, y, r, g, b) {
+function lines(x, y, r, g, b) {
 
     var bright = (r + g + b) / 3;
-    var w = map(bright, 0, 255, 0, vScale);
+    var w = map(bright, 0, 255, 0, 15);
 
-    noStroke();     
-    strokeWeight(0.3)
+    stroke(255)     
+    strokeWeight(.3)
+    rectMode(CENTER);
 
-    fill(r, 0, 0, 10)
-    ellipse(x * vScale, y * vScale, r);
-
-    fill(0, b, 0, 10)
-    ellipse(x * vScale, y * vScale, g);
-
-    fill(0, 0, g, 10)
-    ellipse(x * vScale, y * vScale, b);
+    noFill();
+    //fill(w)
+    push()
+    translate(x * vScale, y * vScale)
+    rotate(w)
+    rect(0, 0, vScale, 1);
+    pop()
 }
 
 function mouseClicked() {
     renderIndex++
 
-    if (renderIndex == 3) {
+    if (renderIndex == 4) {
         renderIndex = 0;
     }
 }
